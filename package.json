@@ -15,7 +15,8 @@
     "electron:dev": "concurrently \"cross-env BROWSER=none yarn start\" \"wait-on http://localhost:3000 && tsc -p electron -w\" \"wait-on http://localhost:3000 && tsc -p electron && electron .\"",
     "electron:build": "tsc -p electron && electron-builder --win --x64",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "story-g": "scaffdog generate --project ./.scaffdog"
   },
   "dependencies": {
     "@emotion/react": "^11.7.0",
@@ -68,6 +69,7 @@
     "eslint-plugin-testing-library": "3.9.2",
     "eslint-webpack-plugin": "2.5.2",
     "prettier": "^2.5.0",
+    "scaffdog": "^1.0.1",
     "wait-on": "^6.0.0"
   },
   "build": {
