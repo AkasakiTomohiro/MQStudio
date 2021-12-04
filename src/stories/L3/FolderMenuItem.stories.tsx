@@ -1,4 +1,6 @@
-import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import StarIcon from '@mui/icons-material/Star';
+import IconButton from '@mui/material/IconButton';
 import { Meta, Story } from '@storybook/react/types-6-0';
 
 import { FolderMenuItem, IFolderMenuItemProps } from './FolderMenuItem';
@@ -16,7 +18,13 @@ Primary.args = {
   child: [
     {
       title: 'child',
-      icon : <FolderOpenIcon />
+      icon : <InsertDriveFileIcon />
+    },
+    {
+      title: 'child',
+      icon : <InsertDriveFileIcon />
     }
-  ]
+  ],
+  
+  children: <IconButton onClick={async () => {}} ><StarIcon/></IconButton>
 };
