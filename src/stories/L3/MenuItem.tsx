@@ -14,13 +14,18 @@ export interface IMenuItemProps {
    * アイコン
    */
 
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
 
   /**
    * タイトル
    */
 
   title: string;
+
+  /**
+   * 一意にしめすID
+   */
+  key: string;
 
   /**
    * 選択しているか
@@ -91,9 +96,12 @@ export const MenuItem = (props: IMenuItemProps): JSX.Element => {
         selected={props.selected}
       >
         <HoverCard />
-        <ListItemIcon>
-          {props.icon}
-        </ListItemIcon>
+        {
+          props.icon && 
+          <ListItemIcon>
+            {props.icon}
+          </ListItemIcon>
+        }
         <ListItemText primary={props.title} />
         {
 

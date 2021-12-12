@@ -23,15 +23,20 @@ export interface IFolderMenuItemProps {
    * ホバー時に表示したいコンテンツ
    * children要素にListItemSecondaryActionを含むときは使用しないこと
    */
-  children?: React.ReactNode;
+  children?: React.ReactElement;
+
+  /**
+   * デフォルトでフォルダの状態
+   */
+  defaultOpen?: boolean;
 }
 
 /**
  * Primary UI component for user interaction
  */
 export const FolderMenuItem = (props: IFolderMenuItemProps): JSX.Element => {
-  const [open, setOpen] = React.useState(false);
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [open, setOpen] = React.useState<boolean>(props.defaultOpen ?? false);
+  const [selectedKey, setSelectedKey] = React.useState('null');
 
   const onClick = (): void => {
     setOpen(!open);
@@ -39,13 +44,13 @@ export const FolderMenuItem = (props: IFolderMenuItemProps): JSX.Element => {
 
   const icon = open ? <FolderOpenIcon /> : <FolderIcon />;
 
-  const handleListItemClick = (index: number): () => void => {
-    return (): void => setSelectedIndex(index);
+  const handleListItemClick = (key: string): () => void => {
+    return (): void => setSelectedKey(key);
   };
 
   return (
     <>
-      <MenuItem title={props.title} onClick={onClick} icon={icon} />
+      <MenuItem title={props.title} onClick={onClick} icon={icon} key="title" />
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="nav" disablePadding>
           {
@@ -53,10 +58,10 @@ export const FolderMenuItem = (props: IFolderMenuItemProps): JSX.Element => {
               <MenuItem 
                 {...m} 
                 sx={{ pl: 4 }} 
-                onClick={handleListItemClick(i)} 
-                selected={i === selectedIndex} 
+                onClick={handleListItemClick(m.key)} 
+                selected={m.key === selectedKey} 
               >
-                {props.children}
+                {props.children && React.cloneElement(props.children, { index: i })}
               </MenuItem>)
           }
         </List>
